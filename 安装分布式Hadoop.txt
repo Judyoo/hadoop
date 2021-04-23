@@ -1,0 +1,13 @@
+1、新建3台虚拟机（Hadoop01、Hadoop02、Hadoop03），后两个为前两个的克隆
+2、打开三台虚拟机，用vi /etc/hostname 命令修改hostname,分别为master，slave1，slave2
+         注： 用reboot重启
+	若出现错误，光标移动到虚拟机中并回车，OK
+3、修改三台主机的映射 vi /etc/hosts 
+	192.168.230.11 master
+	192.168.230.12 slave1
+	192.168.230.13 slave2（改IP并修改最后一行 ONBOOT=yes ：vi /etc/sysconfig/network-scripts/ifcfg-ens33  重启网卡：nmcli c up ens33   reboot）
+远程拷贝到其他两台机器 scp /etc/hosts slave1:/etc   scp /etc/hosts slave2:/etc
+4、创建一个文件夹用来存放Hadoop,java等的安装包(.gz) mkdir -p /data/packs，再创建一个文件夹用来存放解压后的文件mkdir /software,用xftps上传安装包到/data/packs,
+	解压：
+	重命名：
+
